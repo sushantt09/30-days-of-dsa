@@ -89,3 +89,63 @@ MyQueue.prototype.peek = function() {
 MyQueue.prototype.empty = function() {
     return this.s2.length === 0 && this.s1.length === 0;
 };
+
+// problem 3 : valid parentheses
+// time complexity: O(n) and space complexity: O(n)
+var isValid = function(s) {
+    let stack = [];
+    let map = {"}": "{", "]": "[", ")": "("};    
+    for (let i=0; i<s.length; i++){
+        if (["(", "{", "["].includes(s[i])) {
+            stack.push(s[i]);
+        } else if (stack.length > 0 && map[s[i]] == stack[stack.length - 1]){
+            stack.pop();
+        } else {
+            return false;
+        }
+    }
+    return stack.length === 0 ? true : false;
+};
+
+// problem 4 : implement a minStack 
+// time complexity: O(1) for all operations and space complexity: O(n)
+
+var MinStack = function() {
+    this.s = [];  
+    this.minStack = [];
+  };
+  
+  /** 
+   * @param {number} val
+   * @return {void}
+   */
+  MinStack.prototype.push = function(val) {
+      this.s.push(val);
+      if (this.minStack.length === 0 || val <= this.getMin()){
+          this.minStack.push(val);
+      } else {
+          this.minStack.push(this.getMin());
+      }
+  };
+  
+  /**
+   * @return {void}
+   */
+  MinStack.prototype.pop = function() {
+      this.s.pop();
+      this.minStack.pop();
+  };
+  
+  /**
+   * @return {number}
+   */
+  MinStack.prototype.top = function() {
+      return this.s[this.s.length -1];
+  };
+  
+  /**
+   * @return {number}
+   */
+  MinStack.prototype.getMin = function() {
+      return this.minStack[this.minStack.length -1];
+  };
