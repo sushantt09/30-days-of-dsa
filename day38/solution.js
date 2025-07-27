@@ -72,7 +72,6 @@ var postorderTraversal = function(root) {
 };
 
 // problem 6 : postorder traversal using 1 stack
-
 var postorderTraversal = function(root) {
     let ans = [];
     let s1 = [];
